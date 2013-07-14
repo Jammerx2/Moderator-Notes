@@ -428,8 +428,9 @@ function deleteModNote(id) {
 		$pages = ceil($notecount / $perpage);
 		if($page < 1) $page = 1;
 		if($page > $pages) $page = $pages;
+		$start = max(0, ($page-1) * $perpage);
 		
-		$query = $db->simple_select("modnotes", "*", "uid='{$uid}'", array("limit_start" => ($page-1)*$perpage, "limit" => $perpage));
+		$query = $db->simple_select("modnotes", "*", "uid='{$uid}'", array("limit_start" => $start, "limit" => $perpage));
 		
 		$modnotes_notes = "";
 		
